@@ -1,1 +1,64 @@
 #!/usr/bin/python3
+
+import sys
+from functions import f_de_x
+from functions import p
+from functions import yiss
+
+argc = len(sys.argv)
+
+if (argc == 2 and sys.argv[1] == "-h"):
+    print ("USAGE\n\t./205IQ u s [IQ1] [IQ2]\n\nDESCRIPTION\n\tu\tlean\n\ts\tstandard deviation\n\tIQ1\tminimum IQ\n\tIQ2\tmaximum IQ\n")
+
+elif (argc == 3):
+
+    mu = sys.argv[1]
+    sigma = sys.argv[2]
+    try:
+        int(mu)
+        int(sigma)
+    except ValueError:
+        sys.exit(84)
+    mu = int(mu)
+    sigma = int(sigma)
+    for i in range(0, 201):
+        print("%i %s" % (i, format(f_de_x(mu, sigma, i), '.5f')))
+
+elif (argc == 4):
+
+    mu = sys.argv[1]
+    sigma = sys.argv[2]
+    borne = sys.argv[3]
+    try:
+        int(mu)
+        int(sigma)
+        int(borne)
+    except ValueError:
+        sys.exit(84)
+    mu = int(mu)
+    sigma = int(sigma)
+    borne = int(borne)
+    print("%s%% of people have an IQ inferior to %i" % (format((100 * p(mu, sigma, borne)), '.1f'), borne))
+
+#argc = 5
+elif (argc == 5):
+    
+    mu = sys.argv[1]
+    sigma = sys.argv[2]
+    borne1 = sys.argv[3]
+    borne2 = sys.argv[4]
+    try:
+        int(mu)
+        int(sigma)
+        int(borne1)
+        int(borne2)
+    except ValueError:
+        sys.exit(84)
+    mu = int(mu)
+    sigma = int(sigma)
+    borne1 = int(borne1)
+    borne2 = int(borne2)
+    print("%s%% of people have an IQ between %i and %i" % (format((100 * yiss(mu, sigma, borne1, borne2)), '.1f'), borne1, borne2))
+else:
+    sys.exit(84)
+sys.exit(0)
